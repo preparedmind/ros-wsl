@@ -17,4 +17,6 @@ git clone --recursive https://github.com/espressif/esp-idf.git
 cd ~/esp/esp-idf
 ./install.sh esp32s3
 
-
+#Install micro_ros_espidf_component repository from https://github.com/micro-ROS/micro_ros_espidf_component
+cd ~/esp/esp-idf/components
+git clone https://github.com/micro-ROS/micro_ros_espidf_component.git
