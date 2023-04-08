@@ -1,0 +1,37 @@
+[0.770s] Invoking command in '/root/ros2_ws/src/key_publisher': PYTHONPATH=/root/ros2_ws/build/key_publisher/prefix_override:/root/ros2_ws/install/key_publisher/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../../build/key_publisher build --build-base /root/ros2_ws/build/key_publisher/build install --record /root/ros2_ws/build/key_publisher/install.log --single-version-externally-managed
+[0.961s] running egg_info
+[0.962s] creating ../../build/key_publisher/key_publisher.egg-info
+[0.963s] writing ../../build/key_publisher/key_publisher.egg-info/PKG-INFO
+[0.963s] writing dependency_links to ../../build/key_publisher/key_publisher.egg-info/dependency_links.txt
+[0.963s] writing entry points to ../../build/key_publisher/key_publisher.egg-info/entry_points.txt
+[0.963s] writing requirements to ../../build/key_publisher/key_publisher.egg-info/requires.txt
+[0.964s] writing top-level names to ../../build/key_publisher/key_publisher.egg-info/top_level.txt
+[0.964s] writing manifest file '../../build/key_publisher/key_publisher.egg-info/SOURCES.txt'
+[0.966s] reading manifest file '../../build/key_publisher/key_publisher.egg-info/SOURCES.txt'
+[0.967s] writing manifest file '../../build/key_publisher/key_publisher.egg-info/SOURCES.txt'
+[0.967s] running build
+[0.967s] running build_py
+[0.967s] creating /root/ros2_ws/build/key_publisher/build
+[0.968s] creating /root/ros2_ws/build/key_publisher/build/lib
+[0.968s] creating /root/ros2_ws/build/key_publisher/build/lib/key_publisher
+[0.968s] copying key_publisher/key_pub_code.py -> /root/ros2_ws/build/key_publisher/build/lib/key_publisher
+[0.968s] copying key_publisher/__init__.py -> /root/ros2_ws/build/key_publisher/build/lib/key_publisher
+[0.968s] running install
+[0.969s] running install_lib
+[0.970s] creating /root/ros2_ws/install/key_publisher/lib/python3.10/site-packages/key_publisher
+[0.970s] copying /root/ros2_ws/build/key_publisher/build/lib/key_publisher/key_pub_code.py -> /root/ros2_ws/install/key_publisher/lib/python3.10/site-packages/key_publisher
+[0.970s] copying /root/ros2_ws/build/key_publisher/build/lib/key_publisher/__init__.py -> /root/ros2_ws/install/key_publisher/lib/python3.10/site-packages/key_publisher
+[0.971s] byte-compiling /root/ros2_ws/install/key_publisher/lib/python3.10/site-packages/key_publisher/key_pub_code.py to key_pub_code.cpython-310.pyc
+[0.973s] byte-compiling /root/ros2_ws/install/key_publisher/lib/python3.10/site-packages/key_publisher/__init__.py to __init__.cpython-310.pyc
+[0.973s] running install_data
+[0.974s] creating /root/ros2_ws/install/key_publisher/share/ament_index
+[0.974s] creating /root/ros2_ws/install/key_publisher/share/ament_index/resource_index
+[0.974s] creating /root/ros2_ws/install/key_publisher/share/ament_index/resource_index/packages
+[0.975s] copying resource/key_publisher -> /root/ros2_ws/install/key_publisher/share/ament_index/resource_index/packages
+[0.975s] copying package.xml -> /root/ros2_ws/install/key_publisher/share/key_publisher
+[0.975s] running install_egg_info
+[0.976s] Copying ../../build/key_publisher/key_publisher.egg-info to /root/ros2_ws/install/key_publisher/lib/python3.10/site-packages/key_publisher-0.0.0-py3.10.egg-info
+[0.977s] running install_scripts
+[1.009s] Installing key_node script to /root/ros2_ws/install/key_publisher/lib/key_publisher
+[1.010s] writing list of installed files to '/root/ros2_ws/build/key_publisher/install.log'
+[1.079s] Invoked command in '/root/ros2_ws/src/key_publisher' returned '0': PYTHONPATH=/root/ros2_ws/build/key_publisher/prefix_override:/root/ros2_ws/install/key_publisher/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../../build/key_publisher build --build-base /root/ros2_ws/build/key_publisher/build install --record /root/ros2_ws/build/key_publisher/install.log --single-version-externally-managed

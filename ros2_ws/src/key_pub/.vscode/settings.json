@@ -1,0 +1,22 @@
+{
+    "python.autoComplete.extraPaths": [
+        "/root/ros2_ws/install/turtlesim/local/lib/python3.10/dist-packages",
+        "/root/ros2_ws/install/py_pubsub/lib/python3.10/site-packages",
+        "/root/ros2_ws/install/key_pub/lib/python3.10/site-packages",
+        "/root/ros2_ws/install/key_input/lib/python3.10/site-packages",
+        "/root/ros2_ws/install/keyPub/lib/python3.10/site-packages",
+        "/root/microros_ws/install/micro_ros_msgs/local/lib/python3.10/dist-packages",
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    ],
+    "python.analysis.extraPaths": [
+        "/root/ros2_ws/install/turtlesim/local/lib/python3.10/dist-packages",
+        "/root/ros2_ws/install/py_pubsub/lib/python3.10/site-packages",
+        "/root/ros2_ws/install/key_pub/lib/python3.10/site-packages",
+        "/root/ros2_ws/install/key_input/lib/python3.10/site-packages",
+        "/root/ros2_ws/install/keyPub/lib/python3.10/site-packages",
+        "/root/microros_ws/install/micro_ros_msgs/local/lib/python3.10/dist-packages",
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    ]
+}

@@ -1,0 +1,21 @@
+[0.821s] Invoking command in '/root/ros2_ws/src/key_pub': PYTHONPATH=/root/ros2_ws/build/key_pub/prefix_override:/root/ros2_ws/install/key_pub/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../../build/key_pub build --build-base /root/ros2_ws/build/key_pub/build install --record /root/ros2_ws/build/key_pub/install.log --single-version-externally-managed
+[0.990s] running egg_info
+[0.990s] writing ../../build/key_pub/key_pub.egg-info/PKG-INFO
+[0.991s] writing dependency_links to ../../build/key_pub/key_pub.egg-info/dependency_links.txt
+[0.991s] writing entry points to ../../build/key_pub/key_pub.egg-info/entry_points.txt
+[0.991s] writing requirements to ../../build/key_pub/key_pub.egg-info/requires.txt
+[0.991s] writing top-level names to ../../build/key_pub/key_pub.egg-info/top_level.txt
+[0.992s] reading manifest file '../../build/key_pub/key_pub.egg-info/SOURCES.txt'
+[0.993s] writing manifest file '../../build/key_pub/key_pub.egg-info/SOURCES.txt'
+[0.993s] running build
+[0.993s] running build_py
+[0.993s] running install
+[0.994s] running install_lib
+[0.994s] running install_data
+[0.995s] running install_egg_info
+[0.996s] removing '/root/ros2_ws/install/key_pub/lib/python3.10/site-packages/key_pub-0.0.0-py3.10.egg-info' (and everything under it)
+[0.996s] Copying ../../build/key_pub/key_pub.egg-info to /root/ros2_ws/install/key_pub/lib/python3.10/site-packages/key_pub-0.0.0-py3.10.egg-info
+[0.997s] running install_scripts
+[1.013s] Installing keynode script to /root/ros2_ws/install/key_pub/lib/key_pub
+[1.013s] writing list of installed files to '/root/ros2_ws/build/key_pub/install.log'
+[1.045s] Invoked command in '/root/ros2_ws/src/key_pub' returned '0': PYTHONPATH=/root/ros2_ws/build/key_pub/prefix_override:/root/ros2_ws/install/key_pub/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../../build/key_pub build --build-base /root/ros2_ws/build/key_pub/build install --record /root/ros2_ws/build/key_pub/install.log --single-version-externally-managed
