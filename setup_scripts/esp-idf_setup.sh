@@ -17,4 +17,12 @@ git clone --recursive https://github.com/espressif/esp-idf.git
 cd ~/esp/esp-idf
 ./install.sh esp32s3
 
+#The following commands are from https://github.com/micro-ROS/micro_ros_espidf_component
 
+#Install catkin and colcon
+. $HOME/esp/esp-idf/export.sh
+pip3 install catkin_pkg lark-parser empy colcon-common-extensions
+
+#Clone micro_ros_espidf_component repository
+cd ~/esp/esp-idf/components
+git clone https://github.com/micro-ROS/micro_ros_espidf_component.git
