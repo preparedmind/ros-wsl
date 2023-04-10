@@ -19,8 +19,11 @@
 #include <freertos/task.h>
 #include <freertos/queue.h>
 
+#include <driver/gpio.h>
 
 #define STRING_BUFFER_LEN 50
+
+#define LED_BUILTIN 2
 
 #define RCCHECK(fn) { rcl_ret_t temp_rc = fn; if((temp_rc != RCL_RET_OK)){printf("Failed status on line %d: %d. Aborting.\n",__LINE__,(int)temp_rc); vTaskDelete(NULL);}}
 #define RCSOFTCHECK(fn) { rcl_ret_t temp_rc = fn; if((temp_rc != RCL_RET_OK)){printf("Failed status on line %d: %d. Continuing.\n",__LINE__,(int)temp_rc);}}
@@ -36,19 +39,19 @@ void key_sub_callback(){
 
     if(key.data == 0){
         dir.frame_id.data = "Left arrow pressed";
-        //gpio_set_level(LED_BUILTIN, !gpio_get_level(LED_BUILTIN));
+        gpio_set_level(LED_BUILTIN, !gpio_get_level(LED_BUILTIN));
     }
     if(key.data == 1){
         dir.frame_id.data = "Up arrow pressed";
-        //gpio_set_level(LED_BUILTIN, !gpio_get_level(LED_BUILTIN));
+        gpio_set_level(LED_BUILTIN, !gpio_get_level(LED_BUILTIN));
     }
     if(key.data == 2){
         dir.frame_id.data = "Right arrow pressed";
-        //gpio_set_level(LED_BUILTIN, !gpio_get_level(LED_BUILTIN));
+        gpio_set_level(LED_BUILTIN, !gpio_get_level(LED_BUILTIN));
     }
     if(key.data == 3){
         dir.frame_id.data = "Down arrow pressed";
-        //gpio_set_level(LED_BUILTIN, !gpio_get_level(LED_BUILTIN));
+        gpio_set_level(LED_BUILTIN, !gpio_get_level(LED_BUILTIN));
     }
 
     rcl_publish(&dir_publisher, (const void*)&dir, NULL);
@@ -57,6 +60,9 @@ void key_sub_callback(){
 
 void appMain(void *argument){
     //setupPins();
+
+    gpio_reset_pin(LED_BUILTIN);
+    gpio_set_direction(LED_BUILTIN, GPIO_MODE_INPUT_OUTPUT);
 
 
     rcl_allocator_t allocator = rcl_get_default_allocator();

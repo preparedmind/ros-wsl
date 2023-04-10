@@ -43,8 +43,8 @@ class key_pub(Node):
                 self.publisher_.publish(key)
             else:
                 publish = False
-            if publish == True:
-                self.publisher_.publish(key)
+            #if publish == True:
+            #   self.publisher_.publish(key)
 
 
 def getKey(settings):

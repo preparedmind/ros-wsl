@@ -1,0 +1,25 @@
+[0.400s] Invoking command in '/root/ros-wsl/ros2_ws/src/key_pub': PYTHONPATH=/root/ros-wsl/ros2_ws/build/key_pub/prefix_override:/root/ros-wsl/ros2_ws/install/key_pub/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../../build/key_pub build --build-base /root/ros-wsl/ros2_ws/build/key_pub/build install --record /root/ros-wsl/ros2_ws/build/key_pub/install.log --single-version-externally-managed
+[0.548s] running egg_info
+[0.548s] writing ../../build/key_pub/key_pub.egg-info/PKG-INFO
+[0.548s] writing dependency_links to ../../build/key_pub/key_pub.egg-info/dependency_links.txt
+[0.548s] writing entry points to ../../build/key_pub/key_pub.egg-info/entry_points.txt
+[0.549s] writing requirements to ../../build/key_pub/key_pub.egg-info/requires.txt
+[0.549s] writing top-level names to ../../build/key_pub/key_pub.egg-info/top_level.txt
+[0.550s] reading manifest file '../../build/key_pub/key_pub.egg-info/SOURCES.txt'
+[0.551s] writing manifest file '../../build/key_pub/key_pub.egg-info/SOURCES.txt'
+[0.551s] running build
+[0.551s] running build_py
+[0.551s] copying key_pub/key_pub.py -> /root/ros-wsl/ros2_ws/build/key_pub/build/lib/key_pub
+[0.552s] copying key_pub/__init__.py -> /root/ros-wsl/ros2_ws/build/key_pub/build/lib/key_pub
+[0.552s] running install
+[0.552s] running install_lib
+[0.553s] copying /root/ros-wsl/ros2_ws/build/key_pub/build/lib/key_pub/key_pub.py -> /root/ros-wsl/ros2_ws/install/key_pub/lib/python3.10/site-packages/key_pub
+[0.553s] byte-compiling /root/ros-wsl/ros2_ws/install/key_pub/lib/python3.10/site-packages/key_pub/key_pub.py to key_pub.cpython-310.pyc
+[0.554s] running install_data
+[0.554s] running install_egg_info
+[0.555s] removing '/root/ros-wsl/ros2_ws/install/key_pub/lib/python3.10/site-packages/key_pub-0.0.0-py3.10.egg-info' (and everything under it)
+[0.555s] Copying ../../build/key_pub/key_pub.egg-info to /root/ros-wsl/ros2_ws/install/key_pub/lib/python3.10/site-packages/key_pub-0.0.0-py3.10.egg-info
+[0.556s] running install_scripts
+[0.569s] Installing keynode script to /root/ros-wsl/ros2_ws/install/key_pub/lib/key_pub
+[0.570s] writing list of installed files to '/root/ros-wsl/ros2_ws/build/key_pub/install.log'
+[0.591s] Invoked command in '/root/ros-wsl/ros2_ws/src/key_pub' returned '0': PYTHONPATH=/root/ros-wsl/ros2_ws/build/key_pub/prefix_override:/root/ros-wsl/ros2_ws/install/key_pub/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../../build/key_pub build --build-base /root/ros-wsl/ros2_ws/build/key_pub/build install --record /root/ros-wsl/ros2_ws/build/key_pub/install.log --single-version-externally-managed
