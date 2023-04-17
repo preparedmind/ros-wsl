@@ -41,10 +41,6 @@ class key_pub(Node):
             if keycode == "s":
                 key.data = 3
                 self.publisher_.publish(key)
-            else:
-                publish = False
-            #if publish == True:
-            #   self.publisher_.publish(key)
 
 
 def getKey(settings):

@@ -1,0 +1,19 @@
+running egg_info
+writing ../../build/key_pub/key_pub.egg-info/PKG-INFO
+writing dependency_links to ../../build/key_pub/key_pub.egg-info/dependency_links.txt
+writing entry points to ../../build/key_pub/key_pub.egg-info/entry_points.txt
+writing requirements to ../../build/key_pub/key_pub.egg-info/requires.txt
+writing top-level names to ../../build/key_pub/key_pub.egg-info/top_level.txt
+reading manifest file '../../build/key_pub/key_pub.egg-info/SOURCES.txt'
+writing manifest file '../../build/key_pub/key_pub.egg-info/SOURCES.txt'
+running build
+running build_py
+running install
+running install_lib
+running install_data
+running install_egg_info
+removing '/root/ros-wsl/ros2_ws/install/key_pub/lib/python3.10/site-packages/key_pub-0.0.0-py3.10.egg-info' (and everything under it)
+Copying ../../build/key_pub/key_pub.egg-info to /root/ros-wsl/ros2_ws/install/key_pub/lib/python3.10/site-packages/key_pub-0.0.0-py3.10.egg-info
+running install_scripts
+Installing keynode script to /root/ros-wsl/ros2_ws/install/key_pub/lib/key_pub
+writing list of installed files to '/root/ros-wsl/ros2_ws/build/key_pub/install.log'
