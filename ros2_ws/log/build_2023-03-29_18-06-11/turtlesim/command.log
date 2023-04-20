@@ -1,4 +1,0 @@
-Invoking command in '/root/ros2_ws/build/turtlesim': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/root/ros2_ws/install/key_publisher:/root/ros2_ws/install/key_pub:/opt/ros/humble /usr/bin/cmake --build /root/ros2_ws/build/turtlesim -- -j16 -l16
-Invoked command in '/root/ros2_ws/build/turtlesim' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/root/ros2_ws/install/key_publisher:/root/ros2_ws/install/key_pub:/opt/ros/humble /usr/bin/cmake --build /root/ros2_ws/build/turtlesim -- -j16 -l16
-Invoking command in '/root/ros2_ws/build/turtlesim': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/root/ros2_ws/install/key_publisher:/root/ros2_ws/install/key_pub:/opt/ros/humble /usr/bin/cmake --install /root/ros2_ws/build/turtlesim
-Invoked command in '/root/ros2_ws/build/turtlesim' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/root/ros2_ws/install/key_publisher:/root/ros2_ws/install/key_pub:/opt/ros/humble /usr/bin/cmake --install /root/ros2_ws/build/turtlesim

@@ -1,3 +1,0 @@
-[console_scripts]
-keynode = key_pub.key_pub:main
-
