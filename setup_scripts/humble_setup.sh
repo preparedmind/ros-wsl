@@ -28,4 +28,3 @@ DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt install ros-humble-desktop -y
 
 #Install colcon to build ROS2 packages
 apt install python3-colcon-common-extensions -y
-

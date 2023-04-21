@@ -13,6 +13,7 @@ git clone -b $ROS_DISTRO https://github.com/micro-ROS/micro_ros_setup.git src/mi
 
 #Make sure pip and rosdep are installed and initialized
 apt-get install python3-pip -y
+pip install setuptools==58.2.0
 apt-get install python3-rosdep -y
 rosdep init
 
