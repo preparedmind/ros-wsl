@@ -33,3 +33,24 @@
     ```
     "keynode = key_pub.key_pub:main",
     ```
+    from: ros2_ws
+    ```
+    source install/local_setup.bash
+    ```
+    from: ros-wsl/setup_scripts
+    ```source ./motor_controller_Setup.sh`
+    
+    from: admin powershell
+    ```
+    usbipd wsl attach --busid 2-7
+    ```
+    from:microros_ws
+    ```
+    ros2 run micro_ros_setup flash_firmware.sh
+    ros2 run micro_ros_setup create_agent_ws.sh
+    ros2 run micro_ros_setup build_agent.sh
+    source install/local_setup.bash
+    ros2 run micro_ros_agent micro_ros_agent serial --dev 
+    ```
+
+
