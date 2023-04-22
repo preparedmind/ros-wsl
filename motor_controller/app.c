@@ -44,16 +44,16 @@
 #define RCSOFTCHECK(fn) { rcl_ret_t temp_rc = fn; if((temp_rc != RCL_RET_OK)){printf("Failed status on line %d: %d. Continuing.\n",__LINE__,(int)temp_rc);}}
 //create pubs and subs
 rcl_subscription_t key_subscriber;
-rcl_publisher_t ena_publisher;
-rcl_publisher_t enb_publisher;
+rcl_publisher_t vel_publisher;
+rcl_publisher_t pos_publisher;
 //create messages
 std_msgs__msg__Int32 key;
-std_msgs__msg__Int32 ena;
-std_msgs__msg__Header enb;
+std_msgs__msg__Header vel_mes;
+std_msgs__msg__Int32 pos;
 //encoder pulses since last reset, distance in encoder pulses from starting point, return val in dFromV
 int currentECount, position, d= 0;
 //times for averaging velocity and times for when to publish velocity
-clock_t old_t, new_t, end_t, start_t;
+clock_t old_t, new_t;
 //turn double velocity into char for publishing
 char buf[MAX];
 //Estimated pulses per revolution
@@ -141,6 +141,7 @@ void key_sub_callback(){
 // change the position when encoder changes
 static void IRAM_ATTR gpio_isr_handler(void* arg)
 {
+    currentECount++;
     if(gpio_get_level(Enb)>0){
        position++;
        //currentECount++;
@@ -154,8 +155,6 @@ static void IRAM_ATTR gpio_isr_handler(void* arg)
     xQueueSendFromISR(gpio_evt_queue, &gpio_num, NULL);
 }
 void appMain(void *argument){
-    //start time
-    start_t = clock();
     //led pin setup
     gpio_reset_pin(LED_BUILTIN);
     gpio_set_direction(LED_BUILTIN, GPIO_MODE_INPUT_OUTPUT);
@@ -214,10 +213,10 @@ void appMain(void *argument){
     //sub and pub setup
     RCCHECK(rclc_subscription_init_default(&key_subscriber, &node,
 		    ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Int32), "/key"));
-    RCCHECK(rclc_publisher_init_default(&ena_publisher, &node,
-	    ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Int32), "/ena"));
-    RCCHECK(rclc_publisher_init_default(&enb_publisher, &node,
-	    ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Header), "/enb"));
+    RCCHECK(rclc_publisher_init_default(&vel_publisher, &node,
+	    ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Header), "/vel"));
+    RCCHECK(rclc_publisher_init_default(&pos_publisher, &node,
+	    ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Int32), "/pos"));
     rclc_executor_t executor;
     RCCHECK(rclc_executor_init(&executor, &support.context, 3, &allocator));
 	RCCHECK(rclc_executor_add_subscription(&executor, &key_subscriber, &key,
@@ -226,26 +225,20 @@ void appMain(void *argument){
     while(1){
         //spin ros node
 		rclc_executor_spin_some(&executor, RCL_MS_TO_NS(10));
-		//usleep(10000);
-        //publish velocity every 1/2 second
-        end_t = clock();
-        double gap = difftime(end_t, start_t);
-        if (gap >= 0.5){
-            //if the current velocity is real and has changed since last measured publish
-            double curvel = vel();
-            if(!(isnan(curvel)) && fabs(oldvel-curvel) >= 5.0 && isfinite(curvel)){
-                sprintf(buf, "%f", curvel);
-                enb.frame_id.data = buf;            
-                rcl_publish(&enb_publisher, (const void*)&enb, NULL);
-                oldvel = vel();
-            }
+        //if the current velocity is real and has changed since last measured publish
+        double curvel = vel();
+        if(!(isnan(curvel)) && fabs(oldvel-curvel) >= 5.0 && isfinite(curvel)){
+            sprintf(buf, "%f", curvel);
+            vel_mes.frame_id.data = buf;            
+            rcl_publish(&vel_publisher, (const void*)&vel_mes, NULL);
+            oldvel = curvel;
         }
         //publish position
-        ena.data = position;
-        rcl_publish(&ena_publisher, (const void*)&ena, NULL);
+        pos.data = position;
+        rcl_publish(&pos_publisher, (const void*)&pos, NULL);
 	}
     //close pubs and sub
-    RCCHECK(rcl_publisher_fini(&ena_publisher, &node));
-    RCCHECK(rcl_publisher_fini(&enb_publisher, &node));
+    RCCHECK(rcl_publisher_fini(&vel_publisher, &node));
+    RCCHECK(rcl_publisher_fini(&pos_publisher, &node));
 	RCCHECK(rcl_subscription_fini(&key_subscriber, &node));
 }

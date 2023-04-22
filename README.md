@@ -33,3 +33,7 @@
     ```
     "keynode = key_pub.key_pub:main",
     ```
+    - Build the package in `~/ros2_ws` with `colcon build --packages-select key_pub`
+    - Source the package with `source install/local_setup.bash`
+    - You can now run the ros2 package with `ros2 run key_pub keynode`
+    
