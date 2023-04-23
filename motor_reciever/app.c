@@ -42,18 +42,19 @@
 //define ros setup functions
 #define RCCHECK(fn) { rcl_ret_t temp_rc = fn; if((temp_rc != RCL_RET_OK)){printf("Failed status on line %d: %d. Aborting.\n",__LINE__,(int)temp_rc); vTaskDelete(NULL);}}
 #define RCSOFTCHECK(fn) { rcl_ret_t temp_rc = fn; if((temp_rc != RCL_RET_OK)){printf("Failed status on line %d: %d. Continuing.\n",__LINE__,(int)temp_rc);}}
+
 //create pubs and subs
-rcl_subscription_t key_subscriber;
-rcl_publisher_t vel_publisher;
-rcl_publisher_t pos_publisher;
+//rcl_subscription_t key_subscriber;
+rcl_subscriber_t vel_subscriber;
+rcl_subscriber_t pos_subscriber;
 //create messages
-std_msgs__msg__Int32 key;
-std_msgs__msg__Header vel_mes;
+//std_msgs__msg__Int32 key;
+std_msgs__msg__Float32 vel;
 std_msgs__msg__Int32 pos;
 //encoder pulses since last reset, distance in encoder pulses from starting point, return val in dFromV
-int currentECount, position, d, deg, p = 0;
+int currentECount, position, d= 0;
 //times for averaging velocity and times for when to publish velocity
-clock_t old_t, new_t;
+clock_t old_t, new_t, end_t, start_t;
 //turn double velocity into char for publishing
 char buf[MAX];
 //Estimated pulses per revolution
@@ -66,9 +67,7 @@ double b = ((500.0/60.0)*510.0)-3595.0;
 static QueueHandle_t gpio_evt_queue = NULL;
 //PWM setup
 ledc_channel_config_t ledc_channel[2];
-//True if going to specific point
-bool going = true;
-//get duty cycle from velocity(deg/s)
+//get dutycycle from velocity(deg/s)
 int dFromV(double v){
     if (v>=0){
         d = ((500/60)*v)-b;
@@ -114,79 +113,18 @@ void drive(int vel){
         ledc_update_duty(PWM_MODE, PWM_LEFT_FORWARD);
         ledc_update_duty(PWM_MODE, PWM_LEFT_BACKWARD);
     }
-    else if(vel == 0){
-        ledc_set_duty(PWM_MODE, PWM_LEFT_FORWARD, 0);
-        ledc_set_duty(PWM_MODE, PWM_LEFT_BACKWARD, 0);
-        ledc_update_duty(PWM_MODE, PWM_LEFT_FORWARD);
-        ledc_update_duty(PWM_MODE, PWM_LEFT_BACKWARD);
-    }
     old_t = clock();
     oldp = degtrav(currentECount);
 }
-//go to specific rotation in degrees
-void goTo(int degree){
-    while(degree >=360){
-        degree -= 360;
-    }
-    while(degree <= -360){
-        degree += 360;
-    }
-    p = degree*3;
-    going = true;
-    if (p < position){
-        drive(-500);
-    }
-    else if(p > position){
-        drive(500);
-    }
+
+void pos_sub_callback(){
+    return ;
 }
-//When recieving key press turn motor at speed depending on which key pressed
-void key_sub_callback(){
-    if(key.data == 0){
-       //left arrow
-        gpio_set_level(LED_BUILTIN, !gpio_get_level(LED_BUILTIN));
-        drive(dFromV(360));
-    }
-    if(key.data == 1){
-        //up arrow
-        gpio_set_level(LED_BUILTIN, !gpio_get_level(LED_BUILTIN));
-        goTo(-180);
-    }
-    if(key.data == 2){
-        //right arrow
-        gpio_set_level(LED_BUILTIN, !gpio_get_level(LED_BUILTIN));
-        drive(dFromV(-360));
-    }
-    if(key.data == 3){
-        //down arrow
-        gpio_set_level(LED_BUILTIN, !gpio_get_level(LED_BUILTIN));
-        goTo(180);
-    }
+
+void vel_sub_callback(){
+    drive(dFromV(vel.data));
 }
-// change the position when encoder changes
-static void IRAM_ATTR gpio_isr_handler(void* arg)
-{
-    if(p == position && going == true){
-        ledc_set_duty(PWM_MODE, PWM_LEFT_FORWARD, 0);
-        ledc_set_duty(PWM_MODE, PWM_LEFT_BACKWARD, 0);
-        ledc_update_duty(PWM_MODE, PWM_LEFT_FORWARD);
-        ledc_update_duty(PWM_MODE, PWM_LEFT_BACKWARD);
-        //drive(0);
-        going = false;
-    }
-    currentECount++;
-    if(gpio_get_level(Enb)>0){
-       position++;
-    }
-    else{
-        position--;
-    }
-    if(position == 1080 || position == -1080){
-        position = 0;
-    }
-    uint32_t gpio_num = (uint32_t) arg;
-    xQueueSendFromISR(gpio_evt_queue, &gpio_num, NULL);
-}
+
 void appMain(void *argument){
     //led pin setup
     gpio_reset_pin(LED_BUILTIN);
@@ -243,35 +181,18 @@ void appMain(void *argument){
     RCCHECK(rclc_support_init(&support, 0, NULL, &allocator));
     rcl_node_t node;
 	RCCHECK(rclc_node_init_default(&node, "motor_control", "", &support));
-    //sub and pub setup
-    RCCHECK(rclc_subscription_init_default(&key_subscriber, &node,
-		    ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Int32), "/key"));
-    RCCHECK(rclc_publisher_init_default(&vel_publisher, &node,
-	    ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Header), "/vel"));
-    RCCHECK(rclc_publisher_init_default(&pos_publisher, &node,
-	    ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Int32), "/pos"));
+    RCCHECK(rclc_subscription_init_default(&vel_subscriber, &node,
+		    ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Float32), "/vel"));
+    RCCHECK(rclc_subscription_init_default(&pos_subscriber, &node,
+		    ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Int32), "/pos"));
     rclc_executor_t executor;
     RCCHECK(rclc_executor_init(&executor, &support.context, 3, &allocator));
-	RCCHECK(rclc_executor_add_subscription(&executor, &key_subscriber, &key,
-		&key_sub_callback, ON_NEW_DATA));
-    //main loop
+    RCCHECK(rclc_executor_add_subscription(&executor, &vel_subscriber, &vel,
+		&vel_sub_callback, ON_NEW_DATA));
+    RCCHECK(rclc_executor_add_subscription(&executor, &pos_subscriber, &pos,
+		&pos_sub_callback, ON_NEW_DATA));
     while(1){
         //spin ros node
 		rclc_executor_spin_some(&executor, RCL_MS_TO_NS(10));
-        //if the current velocity is real and has changed since last measured publish
-        double curvel = vel();
-        if(!(isnan(curvel)) && fabs(oldvel-curvel) >= 5.0 && isfinite(curvel)){
-            sprintf(buf, "%f", curvel);
-            vel_mes.frame_id.data = buf;            
-            rcl_publish(&vel_publisher, (const void*)&vel_mes, NULL);
-            oldvel = curvel;
-        }
-        //publish position
-        pos.data = position;
-        rcl_publish(&pos_publisher, (const void*)&pos, NULL);
-	}
-    //close pubs and sub
-    RCCHECK(rcl_publisher_fini(&vel_publisher, &node));
-    RCCHECK(rcl_publisher_fini(&pos_publisher, &node));
-	RCCHECK(rcl_subscription_fini(&key_subscriber, &node));
+    }
 }
