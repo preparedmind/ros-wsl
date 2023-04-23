@@ -33,7 +33,24 @@
     ```
     "keynode = key_pub.key_pub:main",
     ```
-    - Build the package in `~/ros2_ws` with `colcon build --packages-select key_pub`
-    - Source the package with `source install/local_setup.bash`
-    - You can now run the ros2 package with `ros2 run key_pub keynode`
+    from: ros2_ws
+    ```
+    source install/local_setup.bash
+    ```
+    from: ros-wsl/setup_scripts
+    ```source ./motor_controller_Setup.sh`
     
+    from: admin powershell
+    ```
+    usbipd wsl attach --busid 2-7
+    ```
+    from:microros_ws
+    ```
+    ros2 run micro_ros_setup flash_firmware.sh
+    ros2 run micro_ros_setup create_agent_ws.sh
+    ros2 run micro_ros_setup build_agent.sh
+    source install/local_setup.bash
+    ros2 run micro_ros_agent micro_ros_agent serial --dev 
+    ```
+
+
